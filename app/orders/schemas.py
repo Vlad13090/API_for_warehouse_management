@@ -14,7 +14,7 @@ class SOrders(BaseModel):
     status: Status
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class SOrderItem(BaseModel):
