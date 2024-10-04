@@ -11,7 +11,7 @@ class Status(str, Enum):
 class SOrders(BaseModel):
     id: int
     date: date
-    status: str
+    status: Status
 
     class Config:
         orm_mode = True

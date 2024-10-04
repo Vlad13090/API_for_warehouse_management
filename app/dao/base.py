@@ -1,7 +1,5 @@
-from sqlalchemy.dialects.mysql import insert
-
 from app.database import async_session
-from sqlalchemy import select
+from sqlalchemy import select, insert
 
 
 class BaseDao:

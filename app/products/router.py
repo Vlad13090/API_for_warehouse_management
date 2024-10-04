@@ -1,3 +1,5 @@
+from typing import List
+
 from fastapi import APIRouter
 from app.products.schemas import SProduct
 from app.products.dao import ProductsDao
@@ -24,8 +26,12 @@ async def get_product_by_id(product_id: int):
 
 
 @router.put("/{product_id}")  # Обновление информации о товаре (PUT /products/{id})
-async def update_product_by_id(product_id: int):
-    pass
+async def update_product_by_id(product_id: int, values: SProduct):
+    await ProductsDao.update(product_id, title=values.title,
+                             description=values.description,
+                             price=values.price,
+                             amount=values.amount
+                             )
 
 
 @router.delete("/{product_id}")  # Удаление товара (DELETE /products/{id})
