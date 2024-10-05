@@ -1,7 +1,7 @@
 from typing import List
 
 from fastapi import APIRouter
-from app.products.schemas import SProduct
+from app.products.schemas import SProduct, SProductOutput
 from app.products.dao import ProductsDao
 
 router = APIRouter(prefix="/products", tags=["Продукты"])
@@ -15,12 +15,12 @@ async def create_product(product: SProduct):
                           amount=product.amount)
 
 
-@router.get("")  # Получение списка товаров (GET /products)
+@router.get("", response_model=List[SProductOutput])  # Получение списка товаров (GET /products)
 async def get_all_products():
     return await ProductsDao.get_all()
 
 
-@router.get("/{product_id}")  # Получение информации о товаре по id (GET /products/{id})
+@router.get("/{product_id}", response_model=SProductOutput)  # Получение информации о товаре по id (GET /products/{id})
 async def get_product_by_id(product_id: int):
     return await ProductsDao.get(product_id)
 

@@ -8,7 +8,7 @@ class BaseDao:
     @classmethod
     async def get_all(cls):
         async with async_session() as session:
-            query = select(cls.model)
+            query = select(cls.model.__table__.columns)
             result = await session.execute(query)
             return result.mappings().all()
 
